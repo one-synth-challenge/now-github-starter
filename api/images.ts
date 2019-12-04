@@ -106,19 +106,20 @@ const listFiles = async () => {
     .bucket(CLOUD_BUCKET)
     .getFiles();
 
-  return files.map(f => f.name);
+  return files;
 };
 
-export default (req: NowRequest, res: NowResponse) => {
+export default async (req: NowRequest, res: NowResponse) => {
   const { file } = req.query;
   if (file) {
-    getFile(file as string).then(contents =>
+    getFile(file as string).then(contents => {
+      console.log('got file param: ', JSON.stringify(file));
       res.status(200).write(contents)
-    );
+    });
     return;
   }
   listFiles().then(files =>
-    res.status(200).send(files.join('\n'))
+    res.status(200).send(files.map(f => f.name).join('\n'))
   );
 };
 

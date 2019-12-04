@@ -114,7 +114,7 @@ export default async (req: NowRequest, res: NowResponse) => {
   if (file) {
     getFile(file as string).then(contents => {
       console.log('got file param: ', JSON.stringify(file));
-      res.status(200).write(contents)
+      res.status(200).send(contents);
     });
     return;
   }

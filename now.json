@@ -1,0 +1,6 @@
+{
+    "env": {
+        "GCLOUD_PROJECT": "osc-project",
+        "CLOUD_BUCKET": "osc-data"
+    }
+}

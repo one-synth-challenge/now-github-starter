@@ -106,7 +106,7 @@ const listFiles = async () => {
     .bucket(CLOUD_BUCKET)
     .getFiles();
 
-  return files;
+  return files.map(f => f.name);
 };
 
 export default (req: NowRequest, res: NowResponse) => {

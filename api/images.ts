@@ -89,11 +89,11 @@ const multer = Multer({
 });
 // [END multer]
 
-module.exports = {
-  getPublicUrl,
-  sendUploadToGCS,
-  multer
-};
+// module.exports = {
+//   getPublicUrl,
+//   sendUploadToGCS,
+//   multer
+// };
 
 import { NowRequest, NowResponse } from '@now/node';
 

@@ -1,5 +1,11 @@
 import {Storage} from '@google-cloud/storage';
 import { RequestError } from 'google-auth-library/build/src/transporters';
+
+Object.assign(process.env, {
+    "GCLOUD_PROJECT": "osc-project",
+    "CLOUD_BUCKET": "osc-data"
+});
+
 const config = require('../config');
 
 const CLOUD_BUCKET = config.get('CLOUD_BUCKET');

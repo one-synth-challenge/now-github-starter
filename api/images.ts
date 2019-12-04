@@ -1,4 +1,5 @@
 import {Storage} from '@google-cloud/storage';
+import { RequestError } from 'google-auth-library/build/src/transporters';
 const config = require('../config');
 
 const CLOUD_BUCKET = config.get('CLOUD_BUCKET');
@@ -22,8 +23,6 @@ const storage = new Storage({
   projectId: config.get('GCLOUD_PROJECT')
 });
 const bucket = storage.bucket(CLOUD_BUCKET);
-
-// gs://osc-data
 
 // Returns the public, anonymously accessable URL to a given Cloud Storage
 // object.
@@ -92,8 +91,21 @@ module.exports = {
 
 import { NowRequest, NowResponse } from '@now/node';
 
+const boo = async (res: NowResponse) => {
+    const out = res.status(200);
+    // Downloads the file
+  await storage
+  .bucket(config.get('CLOUD_BUCKET'))
+  .file("Crookers.fxp")
+  .download((err: RequestError | null, contents: Buffer) => {
+      out.write(contents);
+  });
+}
+
 export default async (_req: NowRequest, res: NowResponse) => {
-    const [files] = await storage.bucket("osc-data").getFiles();
+    const [files] = await storage
+        .bucket(config.get('CLOUD_BUCKET'))
+        .getFiles();
 
     let out = '';
     console.log('Files:');
@@ -103,12 +115,21 @@ export default async (_req: NowRequest, res: NowResponse) => {
   res.status(200).send(out);
 };
 
-// (async () => {
-//     const [files] = await storage.bucket("osc-data").getFiles();
 
-//     let out = '';
-//     console.log('Files:');
-//     files.forEach(file => {
-//         console.log(file.name);
-//     });
-// })();
+(async () => {
+    const [files] = await storage.bucket(config.get('CLOUD_BUCKET')).getFiles();
+
+    let out = '';
+    console.log('Files:');
+    files.forEach(file => {
+        console.log(file.name);
+        storage
+            .bucket(config.get('CLOUD_BUCKET'))
+            .file(file.name)
+            .download((err: RequestError | null, contents: Buffer) => {
+                console.log(contents.toString());
+            });
+    });
+})
+
+//();

@@ -3,40 +3,14 @@
   <head>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <style>
-      body {
-        display: flex;
-        padding: 0;
-        margin: 0;
-        width: 100vw;
-        height: 100vh;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      main {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        margin-top: 20px;
-      }
-
-      h1, h2 {
-        font-weight: 500;
-        font-size: 32px;
-      }
-
-      h2 {
-        font-weight: 300;
-        font-size: 16px;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+    <script>
+    </script>
   </head>
   <body>
-    <img src="first-gh-deployment.svg" alt="First GitHub Deployment" title="First GitHub Deployment" height="50" width="184" />
-    <main>
-      <h1>Congratulationz!</h1>
-      <h2>You just made your first GitHub deployment.</h2>
-    </main>
+    <div>
+        <form action="/api/transcode" class="dropzone"></form>
+    </div>
   </body>
 </html>
